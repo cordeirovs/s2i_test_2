@@ -16,7 +16,7 @@ LABEL io.k8s.description="Platform for building and running PHP 7.0 applications
       io.openshift.tags="builder,php,php70,rh-php70"
 
 # Install Apache httpd and PHP
-RU11N yum install -y centos-release-scl && \
+RUN yum install -y centos-release-scl && \
     yum-config-manager --enable centos-sclo-rh-testing && \
     
     yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS --nogpgcheck && \
