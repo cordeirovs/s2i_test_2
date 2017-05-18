@@ -50,10 +50,9 @@ RUN sed -i -f /opt/app-root/etc/httpdconf.sed /opt/rh/httpd24/root/etc/httpd/con
     chmod -R a+rwx /etc/opt/rh/rh-php70 && \
     chmod -R a+rwx /opt/rh/httpd24/root/var/run/httpd && \
 	chmod +x /usr/libexec/s2i/assemble && \
-    chmod +x /usr/libexec/s2i/run && \
-    chmod +x /usr/libexec/s2i/usage
+    chmod +x /usr/libexec/s2i/run 
 
 USER 1001
 
 # Set the default CMD to print the usage of the language image
-CMD $STI_SCRIPTS_PATH/usage
+# CMD $STI_SCRIPTS_PATH/usage
