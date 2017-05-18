@@ -1,5 +1,7 @@
 FROM centos/s2i-base-centos7
 
+MAINTAINER SoftwareCollections.org <sclorg@redhat.com>
+
 # This image provides an Apache+PHP environment for running PHP
 # applications.
 
@@ -13,23 +15,11 @@ LABEL io.k8s.description="Platform for building and running PHP 7.0 applications
       io.openshift.expose-services="8080:http" \
       io.openshift.tags="builder,php,php70,rh-php70"
 
-# Labels consumed by Red Hat build service
-LABEL name="rhscl/php-70-rhel7" \
-      com.redhat.component="rh-php70-docker" \
-      version="7.0" \
-      release="5.0" \
-      architecture="x86_64"
-
 # Install Apache httpd and PHP
-# To use subscription inside container yum command has to be run first (before yum-config-manager)
-# https://access.redhat.com/solutions/1443553
-RUN yum repolist > /dev/null && \
-    yum-config-manager --enable rhel-server-rhscl-7-rpms && \
-    yum-config-manager --enable rhel-7-server-optional-rpms && \
-    INSTALL_PKGS="rh-php70 rh-php70-php rh-php70-php-mysqlnd rh-php70-php-pgsql rh-php70-php-bcmath \
-                  rh-php70-php-gd rh-php70-php-intl rh-php70-php-ldap rh-php70-php-mbstring rh-php70-php-pdo \
-                  rh-php70-php-process rh-php70-php-soap rh-php70-php-opcache rh-php70-php-xml \
-                  rh-php70-php-gmp" && \
+RU11N yum install -y centos-release-scl && \
+    yum-config-manager --enable centos-sclo-rh-testing && \
+    
+    yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS --nogpgcheck && \
     rpm -V $INSTALL_PKGS && \
     yum clean all -y
 
