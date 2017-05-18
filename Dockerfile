@@ -21,17 +21,17 @@ LABEL name="rhscl/php-70-rhel7" \
       architecture="x86_64"
 
 # Install Apache httpd and PHP
-# To use subscription inside container yam command has to be run first (before yam-config-manager)
+# To use subscription inside container yum command has to be run first (before yum-config-manager)
 # https://access.redhat.com/solutions/1443553
-RUN yam repolist > /dev/null && \
-    yam-config-manager --enable rhel-server-rhscl-7-rpms && \
-    yam-config-manager --enable rhel-7-server-optional-rpms && \
+RUN yum repolist > /dev/null && \
+    yum-config-manager --enable rhel-server-rhscl-7-rpms && \
+    yum-config-manager --enable rhel-7-server-optional-rpms && \
     INSTALL_PKGS="rh-php70 rh-php70-php rh-php70-php-mysqlnd rh-php70-php-pgsql rh-php70-php-bcmath \
                   rh-php70-php-gd rh-php70-php-intl rh-php70-php-ldap rh-php70-php-mbstring rh-php70-php-pdo \
                   rh-php70-php-process rh-php70-php-soap rh-php70-php-opcache rh-php70-php-xml \
                   rh-php70-php-gmp" && \
     rpm -V $INSTALL_PKGS && \
-    yam clean all -y
+    yum clean all -y
 
 # Copy the S2I scripts from the specific language image to $STI_SCRIPTS_PATH
 COPY ./s2i/bin/ $STI_SCRIPTS_PATH
