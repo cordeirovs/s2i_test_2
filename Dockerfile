@@ -41,11 +41,19 @@ RUN sed -i -f /opt/app-root/etc/httpdconf.sed /opt/rh/httpd24/root/etc/httpd/con
     head -n151 /opt/rh/httpd24/root/etc/httpd/conf/httpd.conf | tail -n1 | grep "AllowOverride All" || exit && \
     echo "IncludeOptional /opt/app-root/etc/conf.d/*.conf" >> /opt/rh/httpd24/root/etc/httpd/conf/httpd.conf && \
     mkdir /tmp/sessions && \
+	fix-permissions /opt/app-root && \
+    fix-permissions /opt/bin/start.sh && \
+    fix-permissions /usr/libexec/s2i && \
     chown -R 1001:0 /opt/app-root /tmp/sessions && \
+	chown -R 1001:0 /opt/bin/start.sh && \
+    chown -R 1001:0 /usr/libexec/s2i && \
     chmod -R a+rwx /tmp/sessions && \
     chmod -R ug+rwx /opt/app-root && \
     chmod -R a+rwx /etc/opt/rh/rh-php70 && \
     chmod -R a+rwx /opt/rh/httpd24/root/var/run/httpd
+	chmod +x /usr/libexec/s2i/assemble && \
+    chmod +x /usr/libexec/s2i/run && \
+    chmod +x /opt/bin/start.sh
 
 USER 1001
 
