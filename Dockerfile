@@ -47,8 +47,6 @@ RUN sed -i -f /opt/app-root/etc/httpdconf.sed /opt/rh/httpd24/root/etc/httpd/con
     chmod -R a+rwx /etc/opt/rh/rh-php70 && \
     chmod -R a+rwx /opt/rh/httpd24/root/var/run/httpd
 
-RUN chmod +x assemble run usage
-
 USER 1001
 
 # Set the default CMD to print the usage of the language image
