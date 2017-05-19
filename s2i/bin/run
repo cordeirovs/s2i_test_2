@@ -1,0 +1,5 @@
+#!/bin/bash
+
+export_vars=$(cgroup-limits); export $export_vars
+
+exec /opt/app-root/services.sh
