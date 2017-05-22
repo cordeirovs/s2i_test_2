@@ -33,31 +33,31 @@ RUN yum install -y --setopt=tsflags=nodocs --enablerepo=centosplus \
 
 RUN yum clean all -y
 
-#COPY ./s2i/bin/ $STI_SCRIPTS_PATH
+COPY ./s2i/bin/ $STI_SCRIPTS_PATH
 
-#COPY ./contrib/ /opt/app-root
+COPY ./contrib/ /opt/app-root
 
-#RUN cp /opt/app-root/etc/conf.d/php-fpm/pool.conf /etc/php-fpm.d/www.conf
-#RUN cp /opt/app-root/etc/conf.d/php-fpm/fpm.conf /etc/php-fpm.conf
+RUN cp /opt/app-root/etc/conf.d/php-fpm/pool.conf /etc/php-fpm.d/www.conf
+RUN cp /opt/app-root/etc/conf.d/php-fpm/fpm.conf /etc/php-fpm.conf
 
-#RUN mkdir /tmp/sessions && \
-#    mkdir -p /var/lib/nginx && \
-#    mkdir -p /var/log/nginx && \
-#    touch /var/log/nginx/error.log && \
-#    touch /var/log/nginx/access.log && \
-#    chown -R 1001:0 /var/log/nginx && \
-#    chown -R 1001:0 /var/lib/nginx && \
-#    chown -R 1001:0 /opt/app-root /tmp/sessions && \
-#    chmod -R a+rwx /tmp/sessions && \
-#    chmod -R a+rwx /var/log/nginx && \
-#    chmod -R a+rwx /var/lib/nginx && \
-#    chmod -R ug+rwx /var/log/nginx && \
-#    chmod -R ug+rwx /var/lib/nginx && \
-#    chmod -R ug+rwx /opt/app-root && \
-#    chmod +x /opt/app-root/services.sh
+RUN mkdir /tmp/sessions && \
+    mkdir -p /var/lib/nginx && \
+    mkdir -p /var/log/nginx && \
+    touch /var/log/nginx/error.log && \
+    touch /var/log/nginx/access.log && \
+    chown -R 1001:0 /var/log/nginx && \
+    chown -R 1001:0 /var/lib/nginx && \
+    chown -R 1001:0 /opt/app-root /tmp/sessions && \
+    chmod -R a+rwx /tmp/sessions && \
+    chmod -R a+rwx /var/log/nginx && \
+    chmod -R a+rwx /var/lib/nginx && \
+    chmod -R ug+rwx /var/log/nginx && \
+    chmod -R ug+rwx /var/lib/nginx && \
+    chmod -R ug+rwx /opt/app-root && \
+    chmod +x /opt/app-root/services.sh
 
-#USER 1001
+USER 1001
 
-#CMD $STI_SCRIPTS_PATH/run
+CMD $STI_SCRIPTS_PATH/run
 
 
